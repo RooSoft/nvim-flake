@@ -16,12 +16,11 @@
   };
 
   outputs =
-    {
-      self,
-      nixpkgs,
-      neovim-src,
-      nixfmt,
-      ...
+    { self
+    , nixpkgs
+    , neovim-src
+    , nixfmt
+    , ...
     }:
     let
       inherit (nixpkgs) lib;
@@ -30,7 +29,7 @@
       #
       withSystem =
         f:
-        lib.fold lib.recursiveUpdate {} (
+        lib.fold lib.recursiveUpdate { } (
           map f [
             "x86_64-linux"
             "x86_64-darwin"
@@ -71,7 +70,7 @@
         #
         # Overlay which only provides neovim
         #
-        overlays.default = final: _: removeAttrs self.packages.${final.system} ["default"];
+        overlays.default = final: _: removeAttrs self.packages.${final.system} [ "default" ];
         #
         # Dev shell which provides the final neovim package and npins
         #
@@ -80,6 +79,10 @@
             self.packages.${system}.default
             pkgs.npins
           ];
+        };
+
+        devShell = pkgs.mkShell {
+          buildInputs = [ pkgs.neovim ];
         };
 
         packages.${system} = {
@@ -94,23 +97,25 @@
                     # Add plugins from nixpkgs here
                     #
                     pkgs.vimPlugins.nvim-treesitter.withAllGrammars
+                    pkgs.vimPlugins.kanagawa-nvim
+                    pkgs.vimPlugins.tokyonight-nvim
                   ]
                   ++ lib.mapAttrsToList
                     (
                       #
                       # This generates plugins from npins sources
                       #
-                      name: src: (pkgs.vimUtils.buildVimPlugin {inherit name src;})
+                      name: src: (pkgs.vimUtils.buildVimPlugin { inherit name src; })
                     )
                     (import ./npins);
                 #
                 # These options are self explanatory
                 #
                 withPython3 = true;
-                extraPython3Packages = _: [];
+                extraPython3Packages = _: [ ];
                 withRuby = true;
                 viAlias = false;
-                vimAlias = false;
+                vimAlias = true;
                 #
                 # Use the string generated in ./lua/default.nix for init.vim
                 #
@@ -147,13 +152,13 @@
                   #
                   src = neovim-src;
                   version = neovim-src.shortRev or "dirty";
-                  patches = [];
+                  patches = [ ];
                   preConfigure = ''
                     sed -i cmake.config/versiondef.h.in -e "s/@NVIM_VERSION_PRERELEASE@/-dev-$version/"
                   '';
                 }
               ))
-              (neovimConfig // {inherit wrapperArgs;});
+              (neovimConfig // { inherit wrapperArgs; });
         };
       }
     );

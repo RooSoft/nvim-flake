@@ -30,6 +30,12 @@ vim.o.guifont = "OverpassMono Nerd Font:h10"
 vim.o.spell = true
 vim.o.spelllang = "en_us"
 
+-- transparent background
+-- vim.cmd.highlight("Normal guibg=none")V
+-- vim.cmd.highlight("NonText guibg=none")
+-- vim.api.nvim_set_hl(0, "ColorColumn", { ctermbg=0, bg=none })
+-- vim.api.nvim_set_hl(0, "Normal", { ctermfg=White,  ctermbg=none })
+
 --vim herasy
 vim.cmd.aunmenu({ "PopUp.How-to\\ disable\\ mouse" })
 vim.cmd.aunmenu({ "PopUp.-1-" })
@@ -49,13 +55,14 @@ vim.g.moonflyTransparent = true
 vim.g.moonflyUndercurls = true
 vim.g.moonflyUnderlineMatchParen = true
 vim.g.moonflyVirtualTextColor = true
-vim.cmd.colorscheme("moonfly")
+-- vim.cmd.colorscheme("kanagawa")
+vim.cmd[[colorscheme tokyonight]]
 
 -- SECTION: cinnamon
 require("cinnamon").setup()
 -- SECTION: indent blankline
 require("ibl").setup({
-  indent = { char = "┋" },
+  indent = { char = "┆" },
 })
 
 vim.g.cursorline_timeout = 0
