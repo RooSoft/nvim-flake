@@ -101,6 +101,7 @@
                     pkgs.vimPlugins.nvim-treesitter.withAllGrammars
                     pkgs.vimPlugins.kanagawa-nvim
                     pkgs.vimPlugins.tokyonight-nvim
+                    pkgs.vimPlugins.comment-nvim
                   ]
                   ++ lib.mapAttrsToList
                     (
