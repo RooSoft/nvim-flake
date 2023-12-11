@@ -88,6 +88,8 @@
         packages.${system} = {
           default = self.packages.${system}.neovim;
 
+          buildInputs = [ pkgs.neovim ];
+
           neovim =
             let
               neovimConfig = pkgs.neovimUtils.makeNeovimConfig {
