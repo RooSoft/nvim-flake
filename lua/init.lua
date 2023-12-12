@@ -30,7 +30,7 @@ vim.o.termguicolors = true
 vim.o.guifont = "OverpassMono Nerd Font:h10"
 vim.o.spell = true
 vim.o.spelllang = "en_us"
-vim.o.scrolloff = 10 -- new
+vim.o.scrolloff = 10      -- new
 vim.o.colorcolumn = "120" -- new
 
 -- transparent background
@@ -44,8 +44,8 @@ vim.cmd.aunmenu({ "PopUp.How-to\\ disable\\ mouse" })
 vim.cmd.aunmenu({ "PopUp.-1-" })
 
 -- Searching
-vim.opt.incsearch = true -- show when typing
-vim.opt.hlsearch = true -- highlight
+vim.opt.incsearch = true  -- show when typing
+vim.opt.hlsearch = true   -- highlight
 vim.opt.smartcase = false -- do not override the ignorecase option
 vim.opt.ignorecase = true -- ignorecase option :P
 
@@ -65,7 +65,7 @@ vim.g.moonflyUndercurls = true
 vim.g.moonflyUnderlineMatchParen = true
 vim.g.moonflyVirtualTextColor = true
 -- vim.cmd.colorscheme("kanagawa")
-vim.cmd[[colorscheme tokyonight]]
+vim.cmd([[colorscheme tokyonight]])
 
 -- SECTION: cinnamon
 require("cinnamon").setup()
@@ -81,9 +81,46 @@ require("colorizer").setup()
 vim.keymap.set("n", "<leader>ct", "<cmd> ColorizerToggle<CR>")
 
 -- SECTION: whichkey
-require("which-key").setup({})
+local wk = require("which-key")
+wk.setup({
+	plugins = {
+		marks = true,
+		registers = true,
+		spelling = {
+			enabled = true,
+			suggestions = 20,
+		},
+	},
+	ignore_missings = false,
+	triggers_blacklist = { i = { "j", "k" }, v = { "j", "k" } },
+})
+wk.register({
+  ["<leader>"] = {
+    f = {
+      name = "+telescope",
+      -- f = { "<cmd>Telescope find_files<cr>", "Find File" },
+      -- r = { "<cmd>Telescope oldfiles<cr>", "Open Recent File" },
+      -- n = { "<cmd>enew<cr>", "New File" },
+    },
+    g = {
+      name = "+global"
+    },
+    b = {
+      name = "+bufferline"
+    },
+    c = {
+      name = "+colorizer"
+    },
+    l = {
+      name = "language server"
+    },
+    t = {
+      name = "NvimTree"
+    }
+  },
+})
 
-require('Comment').setup()
+require("Comment").setup()
 
 require("toggleterm").setup({
   open_mapping = [[<Leader>e]],
