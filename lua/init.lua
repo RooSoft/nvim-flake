@@ -71,7 +71,7 @@ vim.cmd[[colorscheme tokyonight]]
 require("cinnamon").setup()
 -- SECTION: indent blankline
 require("ibl").setup({
-  indent = { char = "┆" },
+  indent = { char = "︙" },
 })
 
 vim.g.cursorline_timeout = 0
