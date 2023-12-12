@@ -102,6 +102,7 @@
                     pkgs.vimPlugins.kanagawa-nvim
                     pkgs.vimPlugins.tokyonight-nvim
                     pkgs.vimPlugins.comment-nvim
+                    pkgs.vimPlugins.vim-pathogen
                   ]
                   ++ lib.mapAttrsToList
                     (

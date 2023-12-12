@@ -20,8 +20,8 @@ local function open_nvim_tree(data)
   elseif not real_file and not no_name then
     return
   else
-  --  local dir = vim.fn.fnamemodify(data.file, ":p:h:t")
-  --  vim.api.nvim_set_current_dir(dir)
+    --  local dir = vim.fn.fnamemodify(data.file, ":p:h:t")
+    --  vim.api.nvim_set_current_dir(dir)
   end
 
   -- open the tree, find the file but don't focus it
@@ -126,3 +126,16 @@ vim.keymap.set("n", "<leader>fvc", "<cmd> Telescope git_bcommits<CR>")
 vim.keymap.set("n", "<leader>fvw", "<cmd> Telescope git_commits<CR>")
 vim.keymap.set("n", "<leader>fvs", "<cmd> Telescope git_status<CR>")
 vim.keymap.set("n", "<leader>fvx", "<cmd> Telescope git_stash<CR>")
+
+
+-- SECTION: harpoon
+local harpoon = require("harpoon")
+harpoon.setup()
+
+vim.keymap.set("n", "<leader>a", function() harpoon:list():append() end)
+vim.keymap.set("n", "<C-h>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+
+vim.keymap.set("n", "<C-j>", function() harpoon:list():select(1) end)
+vim.keymap.set("n", "<C-k>", function() harpoon:list():select(2) end)
+vim.keymap.set("n", "<C-l>", function() harpoon:list():select(3) end)
+vim.keymap.set("n", "<C-;>", function() harpoon:list():select(4) end)
