@@ -22,7 +22,6 @@ vim.o.visualbell = false
 vim.o.errorbells = false
 vim.o.number = true
 vim.o.relativenumber = true
-vim.o.clipboard = vim.o.clipboard .. "unnamedplus"
 vim.o.wrap = false
 vim.o.hlsearch = false
 vim.o.incsearch = true
@@ -48,6 +47,9 @@ vim.opt.incsearch = true  -- show when typing
 vim.opt.hlsearch = true   -- highlight
 vim.opt.smartcase = false -- do not override the ignorecase option
 vim.opt.ignorecase = true -- ignorecase option :P
+
+-- Clipboard
+vim.o.clipboard = ""
 
 -- map leader to <Space>
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
