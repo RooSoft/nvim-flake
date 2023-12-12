@@ -16,6 +16,18 @@ local attach_keymaps = function(_, _)
   vim.keymap.set("n", "<leader>lf", function()
     vim.lsp.buf.format({ async = true })
   end, opts)
+    -- from the PRIMEAGEN --
+  vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selected block upwards, reindenting
+  vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selected block downwards, reindenting
+  vim.keymap.set("n", "J", "mzJ`z") -- bring the line below at the end of the current line
+  vim.keymap.set("n", "<C-d>", "<C-d>zz")
+  vim.keymap.set("n", "<C-u>", "<C-u>zz")
+  vim.keymap.set("n", "n", "nzzzv")
+  vim.keymap.set("n", "N", "Nzzzv")
+  vim.keymap.set("n", "<leader>f", function()
+    vim.lsp.buf.format()
+  end)
+  vim.keymap.set("n", "<leader>t", "<c-6>")
 end
 local null_ls = require("null-ls")
 
