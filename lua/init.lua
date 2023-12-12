@@ -5,6 +5,7 @@ vim.o.tabstop = 2
 vim.o.shiftwidth = 2
 vim.o.softtabstop = 2
 vim.o.expandtab = true
+vim.o.showcmd = true -- new
 vim.o.cmdheight = 1
 vim.o.updatetime = 300
 vim.o.shortmess = vim.o.shortmess .. "c"
@@ -29,6 +30,8 @@ vim.o.termguicolors = true
 vim.o.guifont = "OverpassMono Nerd Font:h10"
 vim.o.spell = true
 vim.o.spelllang = "en_us"
+vim.o.scrolloff = 10 -- new
+vim.o.colorcolumn = "120" -- new
 
 -- transparent background
 -- vim.cmd.highlight("Normal guibg=none")V
