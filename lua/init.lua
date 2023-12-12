@@ -40,6 +40,12 @@ vim.o.spelllang = "en_us"
 vim.cmd.aunmenu({ "PopUp.How-to\\ disable\\ mouse" })
 vim.cmd.aunmenu({ "PopUp.-1-" })
 
+-- Searching
+vim.opt.incsearch = true -- show when typing
+vim.opt.hlsearch = true -- highlight
+vim.opt.smartcase = false -- do not override the ignorecase option
+vim.opt.ignorecase = true -- ignorecase option :P
+
 -- map leader to <Space>
 vim.keymap.set("n", " ", "<Nop>", { silent = true, remap = false })
 vim.g.mapleader = " "
