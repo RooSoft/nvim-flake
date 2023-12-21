@@ -16,10 +16,10 @@ local attach_keymaps = function(_, _)
   vim.keymap.set("n", "<leader>lf", function()
     vim.lsp.buf.format({ async = true })
   end, opts)
-    -- from the PRIMEAGEN --
+  -- from the PRIMEAGEN --
   vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv") -- move selected block upwards, reindenting
   vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv") -- move selected block downwards, reindenting
-  vim.keymap.set("n", "J", "mzJ`z") -- bring the line below at the end of the current line
+  vim.keymap.set("n", "J", "mzJ`z")           -- bring the line below at the end of the current line
   vim.keymap.set("n", "<C-d>", "<C-d>zz")
   vim.keymap.set("n", "<C-u>", "<C-u>zz")
   vim.keymap.set("n", "n", "nzzzv")
@@ -37,6 +37,7 @@ local code_actions = null_ls.builtins.code_actions
 local ls_sources = {
   formatting.stylua,
   formatting.rustfmt,
+  formatting.elixir,
   --formatting.alejandra,
   code_actions.statix,
   diagnostics.deadnix,
@@ -70,6 +71,17 @@ require("null-ls").setup({
 local lspconfig = require("lspconfig")
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+-- elixir config
+local function elixir_on_attach(client, bufnr)
+  default_on_attach(client, bufnr)
+end
+
+lspconfig.elixirls.setup({
+  on_attach = elixir_on_attach,
+  capabilities = capabilities,
+  cmd = { "elixir-ls" },
+})
 
 -- Rust config
 local rt = require("rust-tools")
