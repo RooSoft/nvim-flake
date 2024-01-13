@@ -49,7 +49,7 @@ require("nvim-tree").setup({
     adaptive_size = true,
   },
   git = {
-    enable = false,
+    enable = true,
     ignore = true,
   },
 
